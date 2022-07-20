@@ -3,7 +3,7 @@
 {% block meta %}<meta name="robots" content="NOINDEX, NOFOLLOW">{% endblock %}
 
 {% block page_title %}
-    <h1>{{ _("History of %(title)s", title=title) }}</h1>
+    <h1>{{ _("History of <span class='title-highlight'>%(title)s</span>", title=title) }}:</h1>
 {% endblock %}
 {% block title %}{{ _("History of %(title)s", title=title) }} - {{ wiki.site_name }}{% endblock %}
 
@@ -14,10 +14,9 @@
             {% for item in history %}
                 <li><a href="{{ item.date_url }}">{{ date_html(item.date)|safe }}</a>
                 {% if edit_url %}
-                <input class="button"
-                       type="submit" name="{{ item.rev}}" value="{{ _('Undo') }}">
+                <input class="button" type="submit" name="{{ item.rev}}" value="{{ _('Undo') }}">
                 {% endif %}
-                . . . .
+                .....
                 <i>{{ page.wiki_link('~%s' % item.author, item.author)|safe }}</i>
                 <div class="hatta-comment">{{ item.comment }}</div></li>
             {% endfor %}

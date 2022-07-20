@@ -38,8 +38,7 @@ var hatta = function () {
     };
 
     hatta.localize_dates = function () {
-        /* Scan whole document for UTC dates and replace them with
-         * local time versions */
+        /* Scan whole document for UTC dates and replace them with local time versions. */
 
         hatta._foreach_tag(['abbr'], function (tag) {
             if (tag.className === 'date') {
@@ -52,8 +51,7 @@ var hatta = function () {
     };
 
     hatta.js_editor = function () {
-        /* Make double click invoke the editor and scroll it to the right
-         * place. */
+        /* Make double click invoke the editor and scroll it to the right place. */
 
         var textBox = document.getElementById('hatta-editortext');
         if (textBox) {
@@ -168,13 +166,114 @@ var hatta = function () {
             }
         }
     };
+    
+    hatta.first_letter_as_capital_for_articles_name_hack = function() {
+        var article = "";
+        var href = window.location.href;
+        if (href.indexOf('/+') > 0) {
+            if (href.indexOf('/+edit/') > 0) {
+                article = /\/[^\/]+$/.exec(href);
+                if (article !== null) {
+                    article = article[0];
+                    if ((/\.[0-9,A-Z,a-z]+$/.exec(article)) === null) {
+                        if (article[1] !== article[1].toUpperCase()) {
+                            href = href.replace(article, "/" + article[1].toUpperCase() + article.substring(2));
+                            window.location.replace(href);
+                        }
+                    }
+                }
+            }
+        } else {
+            if ((/\.[0-9,A-Z,a-z]+$/.exec(href)) === null) {
+                var element = document.getElementsByTagName("h1")[0];
+                element.innerHTML = element.innerHTML + ".";
+            }
+        }
+    };
+
+    hatta.path_to_article_in_strictly_lower_letters_hack = function() {
+        var href = window.location.href;
+        var path = /\/.*\//.exec(href.replace(/^.*\/\//, ""));
+        if (path !== null) {
+            path = path[0];
+            var temp = path.replace(/[\W,0-9]/gi, "");
+            if (href.indexOf('/+edit/') > 0) {
+                for (var i = 0; i < temp.length; i++) {
+                    if (temp[i] === temp[i].toUpperCase()) {
+                        href = href.replace(path, path.toLowerCase());
+                        window.location.replace(href);
+                    }
+                }
+            }
+        }
+    };
+
+    hatta.content_links_with_brackets_hack = function() {
+        var href = window.location.href;
+        if (href.indexOf('/+xxx/') > 0) {}
+        else {
+            var link = "";
+            var text = "";
+            var content = document.getElementById("hatta-content");
+            var regex = /<a[^<]+<\/a>/g;
+            var all_links = content.innerHTML.match(regex);
+            var unique_links = [];
+            if (all_links !== null) {
+                for (var i = 0; i < all_links.length; i++) {
+                    link = all_links[i];
+                    if (unique_links.includes(link) === false) {
+                        unique_links.push(link);
+                    }
+                }
+                for (var i = 0; i < unique_links.length; i++) {
+                    link = unique_links[i];
+                    if (link.indexOf("><") > 0) {}
+                    else {
+                        if (link.indexOf("~") > 0) {
+                            content.innerHTML = content.innerHTML.replaceAll(link, "<span style='font-weight:normal;'>[</span>"+link+"<span style='font-weight:normal;'>]</span>");
+                        } else {
+                            content.innerHTML = content.innerHTML.replaceAll(link, "<span style='font-weight:normal;'>[</span><b>"+link+"</b><span style='font-weight:normal;'>]</span>");
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    hatta.item_type_under_page_index_hack = function() {
+        var href = window.location.href;
+        if (href.indexOf('/+index') > 0) {
+            var li_item = "";
+            var href_regex = /href=["'][^"']+["']/g;
+            var ul_container = document.getElementsByClassName("index")[0];
+            for (let i = 0; i < ul_container.children.length; i++) {
+                li_item = ul_container.children[i];
+                file_extension = /(\.[A-Za-z0-9]+)["']$/.exec(li_item.innerHTML.match(href_regex)[0]);
+                if (file_extension !== null) {
+                    li_item.innerHTML = li_item.innerHTML.replace("Item ", "File ");
+                } else {
+                    li_item.innerHTML = li_item.innerHTML.replace("Item ", "Page ");
+                }
+            }
+        }
+    }
+    
+    hatta.browser_tab_title_hack = function () {
+        var title = document.getElementsByTagName("title")[0];
+        title.innerHTML = title.innerHTML.replace(" - ", ", ") + ".";
+        console.log(title);
+    }
 
     return hatta;
 }();
 
 window.onload = function () {
     /* Initialize our scripts when the document loads. */
-
+    hatta.first_letter_as_capital_for_articles_name_hack();
+    hatta.path_to_article_in_strictly_lower_letters_hack();
+    hatta.content_links_with_brackets_hack();
+    hatta.item_type_under_page_index_hack();
+    hatta.browser_tab_title_hack();
     hatta.run_macros();
     hatta.localize_dates();
     hatta.js_editor();

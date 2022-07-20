@@ -1,28 +1,21 @@
 # -*- coding: utf-8 -*-
 
-import itertools
+import os
 import re
+import itertools
 import datetime
 import hashlib
-import os
 import tempfile
 import pkgutil
-
+import werkzeug
 from werkzeug import urls, wsgi
 from werkzeug.utils import html, escape, redirect
-import werkzeug
-
 captcha = None
-try:
-    from recaptcha.client import captcha
-except ImportError:
-    pass
+try: from recaptcha.client import captcha
+except ImportError: pass
 pygments = None
-try:
-    import pygments
-except ImportError:
-    pass
-
+try: import pygments
+except ImportError: pass
 import hatta.page
 import hatta.parser
 import hatta.error
@@ -526,11 +519,9 @@ def diff(request, title, from_rev, to_rev):
         to_text = request.wiki.storage.get_revision(page.title, to_rev).text
         content = page.diff_content(from_text, to_text, message)
     else:
-        content = [html.p(html(
-            _("Diff not available for this kind of pages.")))]
-    special_title = _('Diff for "%(title)s"') % {'title': title}
-    phtml = page.template('page_special.html', content=content,
-                        special_title=special_title)
+        content = [html.p(html(_("Diff not available for this kind of pages.")))]
+    special_title = _('Diff for <span class="title-highlight">%(title)s</span>') % {'title': title}
+    phtml = page.template('page_special.html', content=content, special_title=special_title)
     resp = WikiResponse(phtml, mimetype='text/html')
     return resp
 
@@ -544,7 +535,7 @@ def all_pages(request):
     phtml = page.template('list.html',
                          pages=sorted(request.wiki.storage.all_pages()),
                          class_='index',
-                         message=_('Index of all pages'),
+                         message=_('Index of all pages and files under this wiki site.'),
                          special_title=_('Page Index'))
     resp = WikiResponse(phtml, mimetype='text/html')
     resp.set_etag('/+index/%s' % request.wiki.storage.repo_revision)
@@ -635,11 +626,10 @@ def search(request):
         h = html
         request.wiki.index.update(request.wiki)
         result = sorted(request.wiki.index.find(words), key=lambda x: -x[0])
-        yield html.p(h(_('%d page(s) containing all words:')
-                              % len(result)))
+        yield html.p(h(_('There are %(result)s page(s) that containing all words.') % {'result': str(len(result))}))
         yield '<ol id="hatta-search-results">'
         for number, (score, title) in enumerate(result):
-            yield h.li(h.b(page.wiki_link(title)), ' ', h.i(str(score)),
+            yield h.li("Page "+h.b(page.wiki_link(title))+" .....", ' ', h.i(str(score)),
                        h.div(search_snippet(title, words),
                              class_="hatta-snippet"),
                        id_="search-%d" % (number + 1))
@@ -653,7 +643,7 @@ def search(request):
     words = tuple(request.wiki.index.split_text(query))
     if not words:
         words = (query,)
-    title = _('Searching for "%s"') % " ".join(words)
+    title = _('Searching for <span class="title-highlight">%s</span>') % ", ".join(words)
     content = page_search(words, page, request)
     phtml = page.template('page_special.html', content=content,
                          special_title=title)
@@ -665,8 +655,7 @@ def backlinks(request, title):
 
     request.wiki.index.update(request.wiki)
     page = hatta.page.get_page(request, title)
-    phtml = page.template('backlinks.html',
-                         pages=request.wiki.index.page_backlinks(title))
+    phtml = page.template('backlinks.html', pages=request.wiki.index.page_backlinks(title))
     resp = WikiResponse(phtml, mimetype='text/html')
     resp.set_etag('/+search/%s' % request.wiki.storage.repo_revision)
     resp.make_conditional(request)

@@ -1,9 +1,10 @@
 {% extends "page.html" %}
 
-{% block page_title %}<h1>{{ _("Editing \"%(title)s\"", title=title) }}</h1>{% endblock %}
+{% block page_title %}<h1>{{ _("Editing <span class='title-highlight'>%(title)s</span>", title=title) }} text content:</h1>{% endblock %}
 {% block title %}{{ _("Editing \"%(title)s\"", title=title) }}{% endblock %}
 
 {% block content %}
+    <p>{{ _("This is a text file, it can be edited under wiki interface (use markdown language).") }}</p>
     <form action="" method="POST" id="hatta-editor"><div>
     <textarea name="text" cols="80" rows="20" id="hatta-editortext"
     >{% for line in lines %}{{ line }}{% endfor %}</textarea>

@@ -311,14 +311,14 @@ class WikiPage(object):
         _ = self.wiki.gettext
         author = self.request.get_author()
         if self.title in self.storage:
-            comment = _('changed')
+            comment = _('Changed.')
             rev = self.revision.rev
             old_author = self.revision.author
             old_comment = self.revision.comment
             if old_author == author:
                 comment = old_comment
         else:
-            comment = _('uploaded')
+            comment = _('Uploaded.')
             rev = -1
         if captcha and self.wiki.recaptcha_public_key:
             recaptcha_html = captcha.displayhtml(
@@ -376,11 +376,11 @@ class WikiPageText(WikiPage):
             rev = self.revision.rev
             old_author = self.revision.author
             old_comment = self.revision.comment
-            comment = _('modified')
+            comment = _('Modified.')
             if old_author == author:
                 comment = old_comment
         except hatta.error.NotFoundErr:
-            comment = _('created')
+            comment = _('Created.')
             rev = -1
         except hatta.error.ForbiddenErr as e:
             return html.p(html(str(e)))

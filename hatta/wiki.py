@@ -105,10 +105,7 @@ class Wiki:
         self.icon_page = self.config.get('icon_page')
         self.alias_page = self.config.get('alias_page', 'Alias')
         self.help_page = self.config.get('help_page', 'Help')
-        self.math_url = self.config.get(
-            'math_url',
-            'mathjax',
-        )
+        self.math_url = self.config.get('math_url', 'mathjax')
         self.pygments_style = self.config.get('pygments_style', 'tango')
         self.extension = self.config.get('extension')
         self.unix_eol = self.config.get_bool('unix_eol', False)

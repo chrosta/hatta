@@ -1,211 +1,179 @@
-/* General */
-
+/*** Block A: ***/
 html {
-    background: #fff;
-    color: #2e3436;
-    font-family: sans-serif;
-    font-size: 96%;
-}
-body {
-    margin: 1em auto;
-    line-height: 1.3;
-    width: 40em
-}
-img {
-    max-width: 100%;
-}
-a {
-    color: #3465a4;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-a.wiki:visited {
-    color: #204a87;
-}
-a.nonexistent,
-a.nonexistent:visited {
-    color: #a40000;
-}
-a.external {
-    color: #3465a4;
-    text-decoration: underline;
-}
-a.external:visited {
-    color: #75507b;
-}
-a img {
-    border: none;
-}
-h1, h2, h3, h4 {
-    color: #babdb6;
-    font-weight: normal;
-    letter-spacing: 0.125em;
-}
-pre {
+    background: #fff url("wallpaper.png") repeat-x 0 0;
+    font-family: Droid Sans, DejaVu Sans, sans-serif;
     font-size: 100%;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    line-height: 1.2;
-    color: #555753;
+    color: #2e3436;
+    height: 100%;
 }
-hr {
-    background: transparent;
-    border:none;
-    height: 0;
-    border-bottom: 1px solid #babdb6;
-    clear: both;
+body { 
+    background: url("background.png") 100% 100% no-repeat fixed;
+    line-height: 1.25;
+    min-height: 100%;
+    margin: 0px;
+    padding: 1px 0px;
 }
-blockquote {
-    border-left:.25em solid #ccc;
-    padding-left:.5em;
-    margin-left:0;
+button a {
+    font-size: 100%;
 }
-abbr.date {
-    border:none;
-}
-dt {
-    font-weight: bold;
-    float: left;
-}
-dd {
-    font-style: italic;
-}
-
-/* Special images */
-img.math,
-img.smiley {
-    vertical-align: middle;
-}
-
-/* Conflicts */
-div.conflict pre.local {
-    background: #fcaf3e;
-    margin-bottom: 0;
-    color: #000;
-}
-div.conflict pre.other {
-    background: #ffdd66;
-    margin-top: 0;
-    color: #000;
-    border-top: #d80 dashed 1px;
-}
-
-/* Diffs */
-pre.diff div.orig {
-    font-size: 75%;
-    color: #babdb6;
-}
-b.highlight,
-pre.diff ins {
-    font-weight: bold;
-    background: #fcaf3e;
-    color: #ce5c00;
+button a:hover, button a.wiki:hover {
     text-decoration: none;
 }
-pre.diff del {
-    background: #eeeeec;
-    color: #888a85;
-    text-decoration: none;
+button:hover {
+    background-color: silver;
 }
-pre.diff div.change {
-    border-left: 2px solid #fcaf3e;
+input.button {
+    cursor: pointer;
 }
-
-/* Layout */
+input.button, div.buttons input {
+    cursor: pointer;
+}
+div#hatta-buttons input {
+    cursor: pointer;
+}
+div#hatta-buttons {
+    text-align: right;
+}
+div#hatta-header {
+    margin: 1em auto;
+    width: 666px; 
+}
+div#hatta-content {
+    margin: 1em auto;
+    margin-top: -0.25em;
+    width: 666px; 
+}
+div#hatta-content form {
+    text-align: right;
+}
 div#hatta-footer {
     border-top: solid 1px #babdb6;
     text-align: right;
+    padding-top: 0.8em;
+    margin: 1em auto;
+    margin-top: -0.2em;
+    width: 666px;
+    clear: both;
+}
+label#hatta-comment {
+    display: block;
+}
+label#hatta-comment input {
+    margin-top: 0.3em;
+    margin-right: 2px;
+    width: 44em;
+}
+ul#hatta-history {
+    text-align: left;
+}
+
+/*** Block B: ***/
+a {color: #2e3436; text-decoration: none}
+a.wiki:visited {color: #2e3436; text-decoration: none;}
+a.nonexistent, a.nonexistent:visited {color: #2e3436; text-decoration: none;}
+a.external {color: #2e3436; font-weight: bold; text-decoration: none;}
+a.external:visited {color: purple; text-decoration: none;}
+a:hover, a.wiki:hover, a.external:hover {text-decoration: underline;}
+a img {border: none;}
+img.smiley {vertical-align: middle;}
+pre {
+    font-size: 95%;
+    white-space: pre-wrap;
+    word-wrap: break-word; 
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    line-height: 1.35;
+    color: #555753;
+    font-family: Droid Sans Mono, DejaVu Sans Mono, Lucida Console, Lucida Typewriter, monospace;
+}
+pre.diff div.orig {/* font-size: 75%; */ color: #babdb6;}
+b.highlight, pre.diff ins {border: solid; border-width: 0px; border-color: #2e3436; font-weight: normal; color: #2e3436; background-color: #dcdcdc; text-decoration: none; /* padding: 0.12em; */}
+pre.diff del {ground: #eeeeec; color: #888a85; text-decoration: none;}
+pre.diff div.change {border-left: 2px solid #fcaf3e;}
+h1, h2, h3, h4, h5 {color: #555753; font-weight: normal; font-size: 175%; letter-spacing: 0.05em; margin-bottom: 0.8em; /* margin-top: 32px; margin-bottom: 28px; */}
+div.buttons {text-align: center;}
+.history input.button {font-size: 75%;}
+.editor textarea {width: 100%; display: block; font-size: 100%; border: solid 1px #babdb6; font-family: Droid Sans Mono, DejaVu Sans Mono, Lucida Console, Lucida Typewriter, monospace; line-height: 1.1;}
+.editor label {display: block; text-align: right;}
+.editor label.comment input {width: 32em;}
+.hatta-link a {font-weight: bold;}
+.hatta-link a:hover {text-decoration: underline;}
+.hatta-link a:visited {color: purple;}
+
+/*** Block C: ***/
+form#hatta-search input#hatta-search-q, .editor label input {
+    border: solid 1px #babdb6;
+    vertical-align: middle;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 90%;
+    cursor: text;
 }
 a#hatta-logo {
     float: left;
     display: block;
-    margin: 0.25em;
 }
 div#hatta-header h1 {
-    margin: 0;
+    background-color: #dcdcdc;
+    border-style: solid;
+    border-color: #babdb6;
+    border-width: 0px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-width: 1px;
+    margin-top: 1.5em;
+    padding: 0px;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding: 0.25em;
+    color: #777;
+}
+h1#hatta-preview-title {
+    background-color: #dcdcdc;
+    border-style: solid;
+    border-color: #babdb6;
+    border-width: 0px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-width: 1px;
+    margin-top: 0.48em;
+    padding: 0px;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding: 0.25em;
+    color: #777;
+}
+div#hatta-preview {
+    margin-top: -0.25em;
 }
 div#hatta-content {
     clear: left;
 }
-div#hatta-header div#hatta-menu {
-    float: right;
-    margin-top: 1.25em;
-}
-div#hatta-header div#hatta-menu a.current {
-    color: #000;
-}
-
-/* Buttons */
-div#hatta-buttons {
-    text-align: center;
-    vertical-align: middle;
-}
-input.button,
-div#hatta-buttons input {
-    font-weight: bold;
-    font-size: 100%;
-    background: #eee;
-    border: solid 1px #babdb6;
-    margin: 0.25em;
-    color: #888a85;
-    vertical-align: middle;
-}
-#hatta-history input.button {
-    font-size: 75%;
-}
-input.button:hover,
-div#hatta-buttons input:hover {
-    border: solid 1px #888a85;
-    color: #2e3436;
-}
-
-/* Editor */
-form#hatta-editor textarea {
-    width: 100%;
-    display: block;
-    font-size: 100%;
-    border: solid 1px #babdb6;
-}
-form#hatta-editor label {
-    display:block;
-    text-align: right;
-}
-form#hatta-editor .upload {
-    margin: 2em auto;
-    text-align: center;
-}
-form#hatta-editor label input {
-    font-size: 100%;
-    border: solid 1px #babdb6;
-    margin: 0.125em 0;
-}
-form#hatta-editor label#hatta-comment input {
-    width: 32em;
-}
-
-/* Search */
-form#hatta-search input#hatta-search-q {
-    font-size: 100%;
-    border: solid 1px #babdb6;
-    margin: 0.125em 0;
-    vertical-align: middle;
-}
 form#hatta-search {
-    margin:0;
     text-align: right;
-    font-size: 80%;
-}
-#hatta-search-results div.hatta-snippet {
-    font-size: 80%;
-    color: #888a85;
+    font-size: 100%;
+    margin: 0px;
+    margin-bottom: 4px;
 }
 
-/* Purple numbers */
+/*** Block D: ***/
+div.snippet {font-size: 80%; color: #888a85;}
+div#hatta-header div#hatta-menu {float: right;}
+div#hatta-header div#hatta-menu a.current { color: #000 }
+div#hatta-menu {}
+
+/*** Block E: ***/
+hr {background: transparent; border: none; height: 0; border-bottom: 1px solid #babdb6; clear: both;}
+i img {float: right; margin-left: 0.25em;}
+b img {float: left; margin-right: 0.25em;}
+table {margin: 1em auto; border-collapse: collapse;}
+table td, table th { border: 1px solid #999; padding: 0.125em 0.25em; line-height: 1.22;}
+div.highlight {border: 1px solid #ccc;}
+blockquote {border-left: 0.25em solid #ccc; padding-left: 0.5em; margin-left: 0;}
+abbr.date {border: none;}
 a.hatta-purple {
     visibility: hidden;
     vertical-align: middle;
@@ -213,39 +181,37 @@ a.hatta-purple {
     font-weight: bold;
     color: #888a85;
 }
-h1:hover a.hatta-purple,
-h2:hover a.hatta-purple,
-h3:hover a.hatta-purple,
-h4:hover a.hatta-purple,
-h5:hover a.hatta-purple,
-h6:hover a.hatta-purple {
+h1:hover a.hatta-purple, h2:hover a.hatta-purple, h3:hover a.hatta-purple, h4:hover a.hatta-purple, h5:hover a.hatta-purple, h6:hover a.hatta-purple {
     visibility: visible;
 }
 
-/* Print styles */
-@media print {
-    body {
-        background: white;
-        color: black;
-        font-size: 100%;
-        font-family: serif;
-    }
-    #hatta-search,
-    #hatta-menu,
-    #hatta-footer {
-        display:none;
-    }
-    a:link, a:visited {
-        color: #520;
-        font-weight: bold;
-        text-decoration: underline;
-    }
-    #hatta-content {
-        width:auto;
-    }
-    #hatta-content a:link:after,
-    #hatta-content a:visited:after {
-        content:" ["attr(href)"] ";
-        font-size:90%;
-    }
+/*** Block F: ***/
+span.title-highlight {
+    border-style: solid;
+    border-top-width: 0.3em;
+    border-bottom-width: 0.3em;
+    border-color: #babdb6;
+    color: #2e3436;
+    background-color: #babdb6;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+b a:hover, b a.wiki:hover, b a.external:hover {
+    text-decoration: underline;
+    color: #2e3436;
+}
+b a:visited, b a.wiki:visited, b a.external:visited {
+    color: purple;
+}
+p {
+    text-align: justify;
+}
+p a.wiki {
+    font-weight: bold;
+}
+p a.wiki:hover {
+    text-decoration: underline;
+}
+p a.wiki:visited {
+    color: purple;
 }

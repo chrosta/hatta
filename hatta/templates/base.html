@@ -64,7 +64,7 @@
 {% block menu %}
     <div id="hatta-menu">
     {% for part in page.menu() %}
-        {{ part|safe }}
+        <button>{{ part|safe }}</button>
     {% endfor %}
     </div>
 {% endblock %}

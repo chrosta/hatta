@@ -4,7 +4,8 @@ This is a fork of [Hatta Wiki](http://hatta-wiki.org), with these changes:
 * uses whoosh for the search index.
 
 To install:
-`pip install git+https://github.com/davestgermain/hatta.git`
+`pip install git+https://github.com/davestgermain/hatta.git`,
+respectively `pip install git+https://github.com/chrosta/hatta.git`
 .
 
 To run against a git repo instead of mercurial:

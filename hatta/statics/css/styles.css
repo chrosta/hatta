@@ -1,13 +1,13 @@
 /*** Block A: ***/
 html {
-    background: #fff url("wallpaper.png") repeat-x 0 0;
+    background: #fff url("/+download/wallpaper.png") repeat-x 0 0;
     font-family: Droid Sans, DejaVu Sans, sans-serif;
     font-size: 100%;
     color: #2e3436;
     height: 100%;
 }
 body { 
-    background: url("background.png") 100% 100% no-repeat fixed;
+    background: url("/+download/background.png") 100% 100% no-repeat fixed;
     line-height: 1.25;
     min-height: 100%;
     margin: 0px;

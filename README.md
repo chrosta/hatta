@@ -13,7 +13,7 @@ To run against a git repo instead of mercurial:
 .
 
 My appearance hacks for Hatta:
-* name of the document in URL is formated always with a first capital letter,
+* first word of document name in URL is formated always to lower letters,
 * path in URL is formated to lower case,
 * buttons and links (to brackets) redesign,
 * titles redesign and javascript hacks.

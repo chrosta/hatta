@@ -30,8 +30,10 @@ input.button, div.buttons input {
 }
 div#hatta-buttons input {
     cursor: pointer;
+    margin-left: 0.4em;
 }
 div#hatta-buttons {
+    margin-top: 0.2em;
     text-align: right;
 }
 div#hatta-header {
@@ -58,13 +60,22 @@ div#hatta-footer {
 label#hatta-comment {
     display: block;
 }
+label#hatta-author {
+    display: block;
+}
 label#hatta-comment input {
     margin-top: 0.3em;
-    margin-right: 2px;
-    width: 44em;
+    width: 43em;
+}
+label#hatta-author input {
+    margin-top: 0.3em;
+    width: 14em;
 }
 ul#hatta-history {
     text-align: left;
+}
+li {
+    text-align: justify;
 }
 
 /*** Block B: ***/
@@ -77,7 +88,7 @@ a:hover, a.wiki:hover, a.external:hover {text-decoration: underline;}
 a img {border: none;}
 img.smiley {vertical-align: middle;}
 pre {
-    font-size: 95%;
+    font-size: 90%;
     white-space: pre-wrap;
     word-wrap: break-word; 
     white-space: -moz-pre-wrap;
@@ -91,10 +102,10 @@ pre.diff div.orig {/* font-size: 75%; */ color: #babdb6;}
 b.highlight, pre.diff ins {border: solid; border-width: 0px; border-color: #2e3436; font-weight: normal; color: #2e3436; background-color: #dcdcdc; text-decoration: none; /* padding: 0.12em; */}
 pre.diff del {ground: #eeeeec; color: #888a85; text-decoration: none;}
 pre.diff div.change {border-left: 2px solid #fcaf3e;}
-h1, h2, h3, h4, h5 {color: #555753; font-weight: normal; font-size: 175%; letter-spacing: 0.05em; margin-bottom: 0.8em; /* margin-top: 32px; margin-bottom: 28px; */}
+h1, h2, h3, h4, h5 {color: #555753; font-weight: normal; font-size: 175%; letter-spacing: 0.05em; /* margin-bottom: 0.8em; */ /* margin-top: 32px; margin-bottom: 28px; */}
 div.buttons {text-align: center;}
 .history input.button {font-size: 75%;}
-.editor textarea {width: 100%; display: block; font-size: 100%; border: solid 1px #babdb6; font-family: Droid Sans Mono, DejaVu Sans Mono, Lucida Console, Lucida Typewriter, monospace; line-height: 1.1;}
+.editor textarea {display: block; font-size: 100%; border: solid 1px #babdb6; font-family: Droid Sans Mono, DejaVu Sans Mono, Lucida Console, Lucida Typewriter, monospace; line-height: 1.1;}
 .editor label {display: block; text-align: right;}
 .editor label.comment input {width: 32em;}
 .hatta-link a {font-weight: bold;}
@@ -130,6 +141,9 @@ div#hatta-header h1 {
     padding-bottom: 0.25em;
     padding: 0.25em;
     color: #777;
+    line-height: 1.7em;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 h1#hatta-preview-title {
     background-color: #dcdcdc;
@@ -171,9 +185,9 @@ i img {float: right; margin-left: 0.25em;}
 b img {float: left; margin-right: 0.25em;}
 table {margin: 1em auto; border-collapse: collapse;}
 table td, table th { border: 1px solid #999; padding: 0.125em 0.25em; line-height: 1.22;}
-div.highlight {border: 1px solid #ccc;}
+div.highlight {border: 1px solid #ccc; padding-left: 0.5em; padding-right: 0.5em;}
 blockquote {border-left: 0.25em solid #ccc; padding-left: 0.5em; margin-left: 0;}
-abbr.date {border: none;}
+abbr.date {margin-right: 0.25em; border: none;}
 a.hatta-purple {
     visibility: hidden;
     vertical-align: middle;

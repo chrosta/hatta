@@ -158,104 +158,82 @@ var hatta = function () {
         }
     };
     
-    hatta.article_name_with_first_letter_as_capital_hack = function() {
-        var href = window.location.href;
-        if (href.indexOf('/+') > 0) {
-            if (href.indexOf('/+edit/') > 0) {
-                // Check if document is not file name.
-                if (/\.\w+$/.exec(href) === null) {
-                    var article = /\/[^\/]+$/.exec(href);
-                    if (article === null) {
-                        window.location.replace(href + "Article");
-                    } else {
-                        article = article[0].substring(1);
-                        // Check and remove underscores.
-                        if (article.indexOf('_') > 0) {
-                            var new_article_name = article.replaceAll('_', "");
-                            href = href.replace(article, new_article_name);
-                            window.location.replace(href);
-                        }
-                        // Check and remove spaces.
-                        if (article.indexOf('%20') > 0) {
-                            var new_article_name = article.replaceAll('%20', "");
-                            href = href.replace(article, new_article_name);
-                            window.location.replace(href);
-                        }
-                        // Check and remove other dividers.
-                        var divs = /\W/.exec(article);
-                        if (divs !== null) {
-                            if (divs.length === 1 && "%".split('').includes(divs[0])) {} else {
-                                var new_article_name = article;
-                                for (var i = 0; i < divs.length; i++) {
-                                    if (divs[i] !== '%') {
-                                        new_article_name = new_article_name.replaceAll(divs[i], "");
-                                    }
-                                }
-                                href = href.replace(article, new_article_name);
-                                window.location.replace(href);
-                            }
-                        }
-                        // Check and fix first letter to capital.
-                        if ((/\.[0-9,A-Z,a-z]+$/.exec(article)) === null) {
-                            if (article[0] !== article[0].toUpperCase()) {
-                                href = href.replace(article, article[0].toUpperCase() + article.substring(1));
-                                window.location.replace(href);
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            if ((/\.[0-9,A-Z,a-z]+$/.exec(href)) === null) {
-                var element = document.getElementsByTagName("h1")[0];
-                element.innerHTML = element.innerHTML + ".";
-            }
-        }
-    };
+    /*-- Hacks begin here. --*/
     
-    hatta.file_name_first_word_in_lower_case_hack = function() {
+    hatta.menu_buttons_hack = function() {
+        var menu = document.getElementById("hatta-menu");
+        menu.innerHTML = menu.innerHTML.replaceAll(">home<", ">Home<");
+    }
+    
+    hatta.home_to_lower_letters_hack = function() {
         var href = window.location.href;
+        if (href.indexOf('/Home') > 0) {
+            window.location.replace("./home");
+        }
+    }
+    
+    hatta.profile_to_lower_letters_hack = function() {
+        var href = window.location.href;
+        if (href.indexOf('/Profile') > 0) {
+            window.location.replace("./profile");
+        }
+    }
+    
+    hatta.generally_forced_format_for_content_names_hack = function() {
+        var href = decodeURI(window.location.href);
         if (href.indexOf('/+edit/') > 0) {
-            // Check if document is file name.
-            if (/\.\w+$/.exec(href) !== null) {
-                var file = href.replace(/.*\//gi, "");
-                var new_file_name = file;
-                // Check and remove dividers in name on first position.
-                new_file_name = file.replace(/^\W*[^()%|\w)]/, "");
-                if (file !== new_file_name) {
-                    href = href.replace(file, new_file_name);
+            var content_name = /\/[^\/]+$/.exec(href);
+            if (content_name !== null) {
+                /* Cleared content name without file extension is here. */
+                content_name = content_name[0].substring(1);
+                if (content_name.indexOf(".") > 0) {
+                    content_name = content_name.split(".")[0];
+                }
+                var new_content_name = "";
+                /* Check and replace underscores. */
+                new_content_name = content_name.replaceAll('_', "-");
+                if (content_name !== new_content_name) {
+                    href = href.replace(content_name, new_content_name);
                     window.location.replace(href);
                 }
-                // Check and replace underscores.
-                new_file_name = file.replaceAll('_', "");
-                if (file !== new_file_name) {
-                    href = href.replace(file, new_file_name);
+                /* Check and replace the same dash dividers side by side. */
+                new_content_name = content_name.replaceAll('--', "-");
+                if (content_name !== new_content_name) {
+                    href = href.replace(content_name, new_content_name);
                     window.location.replace(href);
                 }
-                // Check and replace other dividers.
-                for (i = 0; i < new_file_name.length; i++) {
-                    if (['%','-','.'].includes(new_file_name[i])) {} else {
-                        if (/\W/.exec(new_file_name[i]) !== null) {
-                            new_file_name = new_file_name.replaceAll(new_file_name[i], "");
+                /* Check and replace other dividers. */
+                new_content_name = "";
+                for (i = 0; i < content_name.length; i++) {
+                    if (/\W/.exec(content_name[i]) !== null) {
+                        if ("áčďéěíňóřšťúůýž".split('').includes(content_name[i])) {
+                            new_content_name += content_name[i];
+                        } else {
+                            new_content_name += "-";
                         }
+                    } else {
+                        new_content_name += content_name[i];
                     }
                 }
-                if (file !== new_file_name) {
-                    href = href.replace(file, new_file_name);
+                if (content_name !== new_content_name) {
+                    href = href.replace(content_name, new_content_name);
                     window.location.replace(href);
                 }
-                // Check and fix first word to lower letters.
-                var word = /^\w+/.exec(file)[0];
-                if (word !== word.toLowerCase()) {
-                    href = href.replace(word, word.toLowerCase());
-                    window.location.replace(href);
+                /* Check and fix the first word to lower letters. */
+                var word = /^[^\-\.]+/.exec(content_name);
+                if (word !== null) {
+                    word = word[0];
+                    if (word !== word.toLowerCase()) {
+                        href = href.replace(word, word.toLowerCase());
+                        window.location.replace(href);
+                    }
                 }
-            }
+            } 
         }
-    };
+    }
     
     hatta.path_in_strictly_lower_letters_hack = function() {
-        var href = window.location.href;
+        var href = decodeURI(window.location.href);
         if (href.indexOf('/+edit/') > 0) {
             var path = /\/.*\//.exec(href.replace(/^.*\/\//, ""));
             if (path !== null) {
@@ -322,7 +300,8 @@ var hatta = function () {
     
     hatta.browser_tab_title_hack = function() {
         var title = document.getElementsByTagName("title")[0];
-        title.innerHTML = title.innerHTML.replace(" - ", ", ") + ".";
+        title = title.innerHTML = title.innerHTML.split(" - ");
+        document.getElementsByTagName("title")[0].innerHTML = title[1] + ", " + title[0] + ".";
     }
     
     hatta.page_title_with_dot_hack = function() {
@@ -330,9 +309,19 @@ var hatta = function () {
         var title = document.getElementsByTagName("h1")[0];
         var last_char = /\W+$/.exec(title.innerHTML);
         var file_extension = /\.\w+$/.exec(title.innerHTML);
-        if (last_char === null) {
-            if (file_extension === null) {
-                title.innerHTML += ".";
+        if (href.indexOf('/+') > 0) {
+            if (last_char === null) {
+                if (file_extension === null) {
+                    title.innerHTML += ":";
+                }
+            }
+        } else {
+            if (last_char === null || ['.',':'].includes(last_char) === false) {
+                if (file_extension === null) {
+                    title.innerHTML = "Page <span class='title-highlight'>" + title.innerHTML + "</span>.";
+                } else {
+                    title.innerHTML = "File <span class='title-highlight'>" + title.innerHTML + "</span>.";
+                }
             }
         }
     }
@@ -343,8 +332,10 @@ var hatta = function () {
 /*-- Onload hooks and page start. --*/
 window.onload = function() {
     /* Content name hacks firsts. */
-    hatta.article_name_with_first_letter_as_capital_hack();
-    hatta.file_name_first_word_in_lower_case_hack();
+    hatta.menu_buttons_hack();
+    hatta.home_to_lower_letters_hack();
+    hatta.profile_to_lower_letters_hack();
+    hatta.generally_forced_format_for_content_names_hack();
     hatta.path_in_strictly_lower_letters_hack();
     /* Hacks for content formating. */
     hatta.content_links_with_brackets_hack();

@@ -16,4 +16,4 @@ My appearance hacks for Hatta:
 * first word of document name in URL is formated always to lower letters,
 * path in URL is formated to lower case,
 * buttons and links (to brackets) redesign,
-* titles redesign and javascript hacks.
+* titles redesign, CSS and JS hacks.

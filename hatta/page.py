@@ -1,16 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+#-------------------------------------------------------------------------------
 import difflib
 import hashlib
 import io
 import mimetypes
 import os
 import re
-
+#-------------------------------------------------------------------------------
 from werkzeug.urls import url_quote, url_fix
 from werkzeug.utils import escape, html
-
+#-------------------------------------------------------------------------------
 pygments = None
 try:
     import pygments
@@ -18,23 +18,19 @@ try:
     import pygments.lexers
     import pygments.styles
     import pygments.util
-except ImportError:
-    pass
-
+except ImportError: pass
 captcha = None
 try:
     from recaptcha.client import captcha
-except ImportError:
-    pass
-
+except ImportError: pass
 Image = None
 try:
     from PIL import Image
-except ImportError:
-    pass
-
+except ImportError: pass
+#-------------------------------------------------------------------------------
 import hatta.error
 import hatta.parser
+#-------------------------------------------------------------------------------
 
 
 def check_lock(wiki, title):
@@ -44,18 +40,17 @@ def check_lock(wiki, title):
         'robots.txt',
     ]
     if wiki.read_only:
-        raise hatta.error.ForbiddenErr(_("This site is read-only."))
+        raise hatta.error.ForbiddenErr(_("This site is read only."))
     if title in restricted_pages:
-        raise hatta.error.ForbiddenErr(_("""Can't edit this page.
-It can only be edited by the site admin directly on the disk."""))
+        raise hatta.error.ForbiddenErr(_("Can't edit this page (it can only be edited by the site admin directly on the disk)."))
     if title in wiki.index.page_links(wiki.locked_page, wiki):
         raise hatta.error.ForbiddenErr(_("This page is locked."))
 
 
-
 def get_page(request, title, wiki=None):
-    """Creates a page object based on page's mime type"""
-
+    """
+    Creates a page object based on page's mime type.
+    """
     if wiki is None:
         wiki = request.wiki
     if title:
@@ -88,9 +83,9 @@ def get_page(request, title, wiki=None):
 
 def page_mime(title):
     """
-    Guess page's mime type based on corresponding file name.
-    Default ot text/x-wiki for files without an extension.
-
+    Guess page's mime type based on corresponding file name,
+    default ot text/x-wiki for files without an extension.
+    ---
     >>> page_mime(u'something.txt')
     'text/plain'
     >>> page_mime(u'SomePage')
@@ -104,7 +99,6 @@ def page_mime(title):
     >>> page_mime(u'archive.tar.gz')
     'archive/gzip'
     """
-
     addr = title #.encode('utf-8')  # the encoding doesn't relly matter here
     mime, encoding = mimetypes.guess_type(addr, strict=False)
     if encoding:
@@ -116,17 +110,16 @@ def page_mime(title):
 
 def date_html(date_time):
     """
-    Create HTML for a date, according to recommendation at
-    http://microformats.org/wiki/date
+    Create HTML for a date, according to recommendation
+    at [http://microformats.org/wiki/date].
     """
-
-    return date_time.strftime(
-        '<abbr class="date" title="%Y-%m-%dT%H:%M:%SZ">%Y-%m-%d %H:%M</abbr>')
+    return date_time.strftime('<abbr class="date" title="%Y-%m-%dT%H:%M:%SZ">%Y-%m-%d %H:%M</abbr>')
 
 
 class WikiPage(object):
-    """Everything needed for rendering a page."""
-
+    """
+    Everything needed for rendering a page.
+    """
     def __init__(self, wiki, request, title, mime):
         self.request = request
         self.title = title
@@ -244,7 +237,9 @@ class WikiPage(object):
             return html.a(html(alt), href=self.get_url(addr))
 
     def menu(self):
-        """Generate the menu items"""
+        """
+        Generate the menu items.
+        """
         _ = self.wiki.gettext
         if self.wiki.menu_page in self.storage:
             items = self.index.page_links_and_labels(self.wiki.menu_page, wiki=self.wiki)
@@ -456,11 +451,14 @@ class WikiPageText(WikiPage):
 
 
 class WikiPageColorText(WikiPageText):
-    """Text pages, but displayed colorized with pygments"""
-
+    """
+    Text pages, but displayed colorized with pygments.
+    """
+    
     def view_content(self, lines=None):
-        """Generate HTML for the content."""
-
+        """
+        Generate HTML for the content.
+        """
         if lines is None:
             text = self.revision.text
         else:
@@ -468,8 +466,9 @@ class WikiPageColorText(WikiPageText):
         return self.highlight(text, mime=self.mime)
 
     def highlight(self, text, mime=None, syntax=None, line_no=0):
-        """Colorize the source code."""
-
+        """
+        Colorize the source code.
+        """
         if pygments is None:
             yield html.pre(html(text))
             return
@@ -477,17 +476,16 @@ class WikiPageColorText(WikiPageText):
         formatter = pygments.formatters.HtmlFormatter()
         formatter.line_no = line_no
 
-        def wrapper(source, unused_outfile):
-            """Wrap each line of formatted output."""
-
-            yield 0, '<div class="highlight"><pre>'
+        def wrapper(source):
+            """
+            Wrap each line of formatted output.
+            """
+            yield 0, '<div class=""><pre>'
             for lineno, line in source:
-                yield (lineno,
-                       html.span(line, id_="line_%d" %
-                                         formatter.line_no))
+                yield (lineno, html.span(line, id_="line_%d" %formatter.line_no))
                 formatter.line_no += 1
             yield 0, '</pre></div>'
-
+        
         formatter.wrap = wrapper
         try:
             if mime:

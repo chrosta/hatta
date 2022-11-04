@@ -13,28 +13,63 @@ body {
     margin: 0px;
     padding: 1px 0px;
 }
-button a {
-    font-size: 100%;
+
+.hatta-button {
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    border-style: solid;
+    border-color: #bfbfbf;
+    border-width: 1px;
+    border-radius: 4px;
+    background-color: #e9e9ed;
+    font-family: DejaVu Sans, sans-serif;
+    font-size: 0.84em;
 }
-button a:hover, button a.wiki:hover {
-    text-decoration: none;
-}
-button:hover {
+.hatta-button:hover {
     background-color: silver;
-}
-input.button {
     cursor: pointer;
 }
-input.button, div.buttons input {
+.hatta-button a:hover, .hatta-button a.wiki:hover {
+    text-decoration: none;
     cursor: pointer;
 }
-div#hatta-buttons input {
-    cursor: pointer;
-    margin-left: 0.4em;
+.button {
+    padding: 4px;
+    border-style: solid;
+    border-color: #bfbfbf;
+    border-width: 1px;
+    border-radius: 4px;
+    background-color: #e9e9ed;
+    font-family: Droid Sans, DejaVu Sans, sans-serif;
 }
+.button:hover {
+    background-color: silver;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 div#hatta-buttons {
     margin-top: 0.2em;
     text-align: right;
+}
+div#hatta-buttons input {
+    cursor: pointer;
+    padding: 4px;
+    border-style: solid;
+    border-color: #bfbfbf;
+    border-width: 1px;
+    border-radius: 4px;
+    background-color: #e9e9ed;
+    font-family: Droid Sans, DejaVu Sans, sans-serif;
+    font-size: 0.84em;
+    margin-left: -2px;
+}
+div#hatta-buttons input:hover {
+    background-color: silver;
+    text-decoration: none;
+    cursor: pointer;
 }
 div#hatta-header {
     margin: 1em auto;
@@ -120,6 +155,7 @@ form#hatta-search input#hatta-search-q, .editor label input {
     padding-bottom: 3px;
     padding-left: 2px;
     padding-right: 2px;
+    margin-bottom: 1px;
     font-size: 90%;
     cursor: text;
 }
@@ -177,7 +213,7 @@ form#hatta-search {
 div.snippet {font-size: 80%; color: #888a85;}
 div#hatta-header div#hatta-menu {float: right;}
 div#hatta-header div#hatta-menu a.current { color: #000 }
-div#hatta-menu {}
+div#hatta-menu {margin-right: 2px;}
 
 /*** Block E: ***/
 hr {background: transparent; border: none; height: 0; border-bottom: 1px solid #babdb6; clear: both;}

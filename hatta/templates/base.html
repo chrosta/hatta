@@ -5,40 +5,35 @@
 {% endblock %}
 
 {% block links %}
-    <link rel="stylesheet" type="text/css"
-          href="{{ url(None, 'style_css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ url(None, 'pygments_css') }}" media="print" onload="this.media='all'">
-    <link rel="shortcut icon" type="image/x-icon"
-          href="{{ url(None, 'favicon_ico') }}">
-    <link rel="alternate" type="application/rss+xml"
-          title="{{ wiki.site_name }} (ATOM)"
-          href="{{ url(None, 'atom') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url(None, 'hatta_css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url(None, 'pygments_css') }}" media="print" onload="this.media='all'">
+    <link rel="alternate" type="application/rss+xml" title="{{ wiki.site_name }} (ATOM)" href="{{ url(None, 'atom') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url(None, 'favicon_ico') }}">
     {% if edit_url %}
-        <link rel="alternate" type="application/wiki"
-              href="{{ edit_url }}">
+        <link rel="alternate" type="application/wiki" href="{{ edit_url }}">
     {% endif %}
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url(None, 'scripts_js') }}" defer></script>
+    <script src="{{ url(None, 'hatta_js') }}" defer></script>
     {% if wiki.math_url == 'mathjax' %}
-    <script type="text/x-mathjax-config" defer>
-        MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$']],
-                displayMath: [['$$','$$']],
-                ignoreClass: ".*",
-                processClass: "^(display|inline)-math$",
-                processEscapes: true
-            },
-            showMathMenu: false,
-            showMathMenuMSIE: false
-        });
-    </script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-    defer></script>
+        <script type="text/x-mathjax-config" defer>
+            MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [['$','$']],
+                    displayMath: [['$$','$$']],
+                    ignoreClass: ".*",
+                    processClass: "^(display|inline)-math$",
+                    processEscapes: true
+                },
+                showMathMenu: false,
+                showMathMenuMSIE: false
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript" defer></script>
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript" defer></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" type="text/javascript" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0" type="text/javascript" defer></script>
     {% endif %}
 {% endblock %}
 
@@ -64,7 +59,7 @@
 {% block menu %}
     <div id="hatta-menu">
     {% for part in page.menu() %}
-        <button>{{ part|safe }}</button>
+        <span class="hatta-button">{{ part|safe }}</span>
     {% endfor %}
     </div>
 {% endblock %}

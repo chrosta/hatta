@@ -6,7 +6,7 @@
 {% block content %}
     <p>{{ _("This is a text file, it can be edited under wiki interface (use markdown language).") }}</p>
     <form action="" method="POST" id="hatta-editor"><div>
-    <textarea name="text" cols="80" rows="20" id="hatta-editortext"
+    <textarea style="width: 50.7em;" name="text" cols="80" rows="20" id="hatta-editortext"
     >{% for line in lines %}{{ line }}{% endfor %}</textarea>
     <input type="hidden" name="parent" value="{{ parent }}">
     <label id="hatta-comment">{{ _("Comment") }} <input
@@ -23,7 +23,7 @@
     </div>
     </div></form>
     {% if preview %}
-        <h1 id="hatta-preview-title">{{ _("Preview, not saved") }}</h1>
+        <h1 id="hatta-preview-title">{{ _("Preview, not saved:") }}</h1>
         <div id="hatta-preview">
         {% for part in page.view_content(preview) %}{{ part|safe }}{% endfor %}
         </div>

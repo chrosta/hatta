@@ -17,7 +17,7 @@
                 <input class="button" type="submit" name="{{ item.rev}}" value="{{ _('Undo') }}">
                 {% endif %}
                 .....
-                <i>{{ page.wiki_link('~%s' % item.author, item.author)|safe }}</i>
+                <i>{{ page.wiki_link('~%s/profile' % item.author, item.author)|safe }}</i>
                 <div class="hatta-comment">{{ item.comment }}</div></li>
             {% endfor %}
         </ul>

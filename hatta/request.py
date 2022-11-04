@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-
+#-------------------------------------------------------------------------------
 from werkzeug.urls import url_unquote
 from werkzeug.wrappers import Request, ETagRequestMixin
 import hatta.views
+#-------------------------------------------------------------------------------
 
 
 class WikiRequest(Request, ETagRequestMixin):
@@ -19,14 +20,12 @@ class WikiRequest(Request, ETagRequestMixin):
         self.wiki = wiki
         self.adapter = adapter
 
-    def get_url(self, title=None, view=None, method='GET',
-                external=False, **kw):
+    def get_url(self, title=None, view=None, method='GET', external=False, **kw):
         if view is None:
             view = 'view'
         if title is not None:
             kw['title'] = title.strip()
-        return self.adapter.build(view, kw, method=method,
-                                  force_external=external)
+        return self.adapter.build(view, kw, method=method, force_external=external)
 
     def get_download_url(self, title):
         return self.get_url(title, 'download')
@@ -42,7 +41,6 @@ class WikiRequest(Request, ETagRequestMixin):
             auth = url_unquote(self.environ.get('REMOTE_USER', ""))
         except UnicodeError:
             auth = None
-        author = (self.form.get("author") or cookie or auth or
-                  self.remote_addr)
+        author = (self.form.get("author") or cookie or auth or self.remote_addr)
         return author
 

@@ -5,8 +5,8 @@
 
 {% block footer %}
     {% if edit_url %}
-        <button><a href="{{ edit_url }}" class="edit">{{ _('Edit') }}</a></button>
+        <span class="hatta-button"><a href="{{ edit_url }}" class="edit">{{ _('Edit') }}</a></span>
     {% endif %}
-    <button><a href="{{ url(title_quoted, 'history') }}" class="hatta-history">{{ _('History') }}</a></button>
-    <button><a href="{{ url(title, 'backlinks') }}" class="hatta-backlinks">{{ _('Backlinks') }}</a></button>
+    <span class="hatta-button"><a href="{{ url(title_quoted, 'history') }}" class="hatta-history">{{ _('History') }}</a></span>
+    <span class="hatta-button"><a href="{{ url(title, 'backlinks') }}" class="hatta-backlinks">{{ _('Backlinks') }}</a></span>
 {% endblock %}

@@ -6,9 +6,10 @@
 {% block content %}
     <ul id="hatta-changes">
     {% for date, date_url, title, author, comment in changes %}
-        <li><a href="{{ date_url }}">{{ date_html(date)|safe }}</a>
+        <li>
+            <a href="{{ date_url }}">{{ date_html(date)|safe }}</a>
             <b>{{ page.wiki_link(title)|safe }}</b> .....
-            <i>{{ page.wiki_link('~' + author, author)|safe }}</i>
+            <i>{{ page.wiki_link('~' + author + '/profile', author)|safe }}</i>
             <div class="hatta-comment">{{ comment }}</div>
         </li>
     {% endfor %}

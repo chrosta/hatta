@@ -222,7 +222,7 @@ def read_config():
         # interface='',
         # port=8080,
         # pages_path = 'docs',
-        # front_page = 'Home',
+        # front_page = 'home',
         # site_name = 'Hatta Wiki',
         # page_charset = 'UTF-8',
     )

@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import gettext
-import importlib
 import os
 import sys
+import gettext
+import importlib
 
 import werkzeug
 import werkzeug.routing
@@ -71,8 +71,8 @@ def init_template(translation, template_path):
 
 class Wiki:
     """
-    The main class of the wiki, handling initialization of the whole
-    application and most of the logic.
+    The main class of the wiki, handling initialization of the whole application
+    and most of the logic. 
     """
     storage_class = None
     index_class = hatta.search.whoosh_search.WikiSearch
@@ -93,18 +93,18 @@ class Wiki:
         self.path = os.path.abspath(config.get('pages_path', 'docs'))
         self.repo_path = config.get('repo_path')
         self.page_charset = config.get('page_charset', 'utf-8')
-        self.menu_page = self.config.get('menu_page', 'Menu')
-        self.front_page = self.config.get('front_page', 'Home')
+        self.menu_page = self.config.get('menu_page', 'menu')
+        self.front_page = self.config.get('front_page', 'home')
         self.logo_page = self.config.get('logo_page', 'logo.png')
-        self.locked_page = self.config.get('locked_page', 'Locked')
-        self.site_name = self.config.get('site_name', 'Hatta Wiki')
+        self.locked_page = self.config.get('locked_page', 'locked')
+        self.site_name = self.config.get('site_name', 'HattaWiki')
         self.site_id = site_id or config.get('site_name')
         self.read_only = self.config.get_bool('read_only', False)
         self.allow_bulk_uploads = self.config.get_bool('allow_bulk_uploads', False)
         self.fallback_url = self.config.get('fallback_url')
         self.icon_page = self.config.get('icon_page')
-        self.alias_page = self.config.get('alias_page', 'Alias')
-        self.help_page = self.config.get('help_page', 'Help')
+        self.alias_page = self.config.get('alias_page', 'alias')
+        self.help_page = self.config.get('help_page', 'help')
         self.math_url = self.config.get('math_url', 'mathjax')
         self.pygments_style = self.config.get('pygments_style', 'tango')
         self.extension = self.config.get('extension')
@@ -205,7 +205,9 @@ class Wiki:
             return err
 
     def refresh(self):
-        """Make sure we have the latest revision of storage."""
+        """
+        Make sure we have the latest revision of storage.
+        """
         storage_rev = self.storage.repo_revision
         index_rev = self.index.get_last_revision()
         if storage_rev != index_rev:

@@ -22,7 +22,7 @@ Use root/sudo privileges (if it is necessary).
 Try running it, install necessary Python libraries (and happy hacking).
 
 My appearance hacks for Hatta:
-* first char of document name in URL is formated always to capital letter,
+* first word of document name in URL is formatted always to lower letters,
 * path in URL is formated to lower case,
 * buttons and links (to brackets) redesign,
 * titles redesign, CSS and JS hacks.

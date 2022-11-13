@@ -10,7 +10,7 @@ respectively `pip install git+https://github.com/chrosta/hatta.git`.
 To run against a git repo instead of mercurial:
 `python -m hatta -d /some/repo -v git`.
 
-Alternative amateur deploy:
+Alternative amateur deploy (something like):
 `mkdir $HOME/Hatta; cd $HOME/Hatta/`, 
 `mkdir -p ./repos/default`, 
 `git clone https://github.com/chrosta/hatta`, 
@@ -18,7 +18,7 @@ Alternative amateur deploy:
 `sudo ln -s $HOME/Hatta/hatta/hatta hatta`, 
 `python -m hatta -d $HOME/Hatta/repos/default -v git`.
 
-Use root/sudo privileges (if it is necessary).
+Use root/sudo privileges (if it's necessary).
 Try running it, install necessary Python libraries (and happy hacking).
 
 My appearance hacks for Hatta:

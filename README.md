@@ -18,8 +18,7 @@ Alternative amateur deploy (something like):
 `sudo ln -s $HOME/Hatta/hatta/hatta hatta`, 
 `python -m hatta -d $HOME/Hatta/repos/default -v git`.
 
-Use root/sudo privileges (if it's necessary).
-Try running it, install necessary Python libraries (and happy hacking).
+Use root/sudo privileges (if it's necessary) and try running it, install necessary Python libraries too (and happy hacking).
 
 My appearance hacks for Hatta:
 * first word of document name in URL is formatted always to lower letters,

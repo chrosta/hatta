@@ -1,3 +1,6 @@
+Hatta
+=====
+
 This is a fork of [Hatta Wiki](http://hatta-wiki.org), with these changes:
 * supports python 3 only and Mercurial version 5.4+,
 * supports using git repositories,
